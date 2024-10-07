@@ -1,3 +1,31 @@
+# はじめに
+## 構築環境
+下記の環境でLaravelを用いてTODOアプリを作成しました。
+- Windows11
+- PHP 8.1.30
+- Laravel Framework 10.48.22
+- MySQL 8.4
+- Docker
+
+筆者はDockerの知識があまりないため、Chat-GPTをフル活用しました。
+
+
+## 手順概要
+Windows環境にPHPやLaravelをインストールしたくなかったため、下記の手順で作成しました。
+
+Windowsのフォルダは空の状態でDocker環境構築(コンテナ環境を優先とするマウント設定)
+↓
+コンテナ内でLaravelプロジェクトを作成
+↓
+コンテナ内のLaravelプロジェクトをindowsのフォルダにコピー
+↓
+Windows環境を優先するマウント設定でDocker環境構築
+↓
+Laravelの各ファイルを編集
+↓
+完成
+
+# 作成手順
 ## 1\. 環境設定
 
 ### 1.1 Dockerのインストール
@@ -51,7 +79,7 @@
     
 - 同じディレクトリに「Dockerfile」を作成し、以下の内容を追加:
     
-    ```jsx
+    ```
         FROM php:8.1-fpm
 
         RUN apt-get update && apt-get install -y \
@@ -99,8 +127,6 @@
 > 例：　docker cp todo-list-app-1:/var/www/app ./app
 
 DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
-
-
 
 
 ### 2.2 .envファイルの設定
@@ -490,7 +516,8 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
 
 ## 9\. アプリケーションの動作確認
 
-- ブラウザで`http://localhost:8000/tasks/index`にアクセスし、TODOリストアプリケーションが正常に動作することを確認
+- ブラウザで`http://localhost:8000/tasks/index`にアクセスし、TODOリストアプリケーションが正常に動作することを確認。
+- そのほかのページが動作することも確認。
 
 ## 10\. 開発とデバッグ
 
@@ -510,3 +537,7 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     docker-compose down
     ```
     
+# 時間があれば盛り込みたい内容
+- ログの追加
+- モデルやサービスに処理を分散させる
+- シーダーの追加
