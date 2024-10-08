@@ -17,7 +17,7 @@ Windowsのフォルダは空の状態でDocker環境構築(コンテナ環境を
 ↓
 コンテナ内でLaravelプロジェクトを作成
 ↓
-コンテナ内のLaravelプロジェクトをindowsのフォルダにコピー
+コンテナ内のLaravelプロジェクトをwindowsのフォルダにコピー
 ↓
 Windows環境を優先するマウント設定でDocker環境構築
 ↓
@@ -123,7 +123,7 @@ Laravelの各ファイルを編集
 
 `docker-compose up -d`でビルド＆立ち上げ。立ち上げ時にコンテナ内でLaravelプロジェクトが作成される。
 
-`docker cp <コンテナ名>:/var/www/app ./app`でコンテナ内にしかないLaravelプロジェクトをWindows11環境にもコピー
+`docker cp <コンテナ名>:/var/www/app ./app`でコンテナ内のLaravelプロジェクトをWindows11環境にもコピー
 > 例：　docker cp todo-list-app-1:/var/www/app ./app
 
 DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
@@ -131,7 +131,7 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
 
 ### 2.2 .envファイルの設定
 
-- .envファイルを開き、以下のように編集:
+- .envファイルを開き、以下の部分を編集:
     
     ```
     DB_CONNECTION=mysql
@@ -152,16 +152,8 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     ```
     
 
-## 4\. データベースのセットアップ
 
-- 以下のコマンドを実行してマイグレーションを実行:
-    
-    ```
-    docker-compose exec app php artisan migrate
-    ```
-    
-
-## 5\. モデルとマイグレーションの作成
+## 4\. モデルとマイグレーションの作成
 
 - 以下のコマンドを実行してTaskモデルとマイグレーションを作成:
     
@@ -260,7 +252,7 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     
 
 
-## 6\. コントローラーの作成
+## 5\. コントローラーの作成
 
 - 以下のコマンドを実行してTaskControllerを作成:
     
@@ -344,7 +336,7 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     ```
 
 
-## 7\. ルーティングの設定
+## 6\. ルーティングの設定
 
 - routes/web.phpを開き、以下のように編集:
     
@@ -367,10 +359,10 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     ```
     
 
-## 8\. ビューの作成
+## 7\. ビューの作成
 
 - 共通レイアウトの作成
-    -app\resources\views\layouts\app.blade.phpディレクトリを作成し、以下のファイルを作成します：
+    - app\resources\views\layouts\app.blade.phpディレクトリを作成し、以下のファイルを作成します：
         ```php
             <!DOCTYPE html>
             <html lang="ja">
@@ -387,7 +379,6 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
                         <h1 class="display-4">タスク管理システム</h1>
                     </div>
                 </header>
-
                 <!-- メインコンテンツ部分 -->
                 <main class="container">
                     <div class="bg-white p-4 rounded shadow-sm">
@@ -396,12 +387,11 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
                 </main>
             </body>
             </html>
-
         ```
 
 - ビューファイルの作成
     
-    -app\resources\views\tasksディレクトリを作成し、以下のファイルを作成します：
+    - app\resources\views\tasksディレクトリを作成し、以下のファイルを作成します：
         
         - index.blade.php（タスク一覧画面）
             ```php
@@ -514,12 +504,12 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
 
 これらのファイルは、HTMLとLaravelのBladeテンプレート構文を使用して、フォームと一覧表示を実装しています。各ファイルは@extendsディレクティブを使用してレイアウトを継承し、@sectionディレクティブを使用してコンテンツを定義しています。
 
-## 9\. アプリケーションの動作確認
+## 8\. アプリケーションの動作確認
 
-- ブラウザで`http://localhost:8000/tasks/index`にアクセスし、TODOリストアプリケーションが正常に動作することを確認。
+- ブラウザで`http://localhost:8000/tasks/index`にアクセスし、TODOアプリが正常に動作することを確認。
 - そのほかのページが動作することも確認。
 
-## 10\. 開発とデバッグ
+## 9\. ログの確認
 
 - コードの変更は自動的にDockerコンテナに反映されます
     
@@ -529,7 +519,7 @@ DockerfileのVolumeをコメントアウトして再度`docker-compose up -d`
     docker-compose logs app
     ```
 
-## 11\. Dockerコンテナの停止
+## 10\. Dockerコンテナの停止
 
 - 開発終了時、以下のコマンドでDockerコンテナを停止:
     
